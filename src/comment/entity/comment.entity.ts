@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'agents' })
+@Entity({ name: 'comments' })
 export class Comment {
   constructor(props?: Partial<Comment>) {
     props && Object.assign(this, props);

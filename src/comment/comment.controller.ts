@@ -9,7 +9,7 @@ import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 
 @Controller({
-  path: '/agents',
+  path: '/comments',
 })
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
