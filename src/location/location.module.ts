@@ -10,4 +10,4 @@ import { LocationService } from './location.service';
   providers: [...LocationProvider, LocationService],
   exports: [LocationService],
 })
-export class LOcationModule {}
+export class LocationModule {}
