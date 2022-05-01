@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { Comment } from './entity/comment.entity';
+import { Character } from './entity/character.entity';
 import {
   Injectable,
   Inject,
@@ -7,15 +7,17 @@ import {
 } from '@nestjs/common';
 
 @Injectable()
-export class CommentService {
+export class CharacterService {
   constructor(
-    @Inject('COMMENT_REPOSITORY')
-    private commentRepository: Repository<Comment>,
+    @Inject('CHARACTER_REPOSITORY')
+    private characterRepository: Repository<Character>,
   ) {}
 
-  async create(createCommentPayload: any): Promise<any> {
+  async create(createCharacterPayload: any): Promise<any> {
     try {
-      const comment = await this.commentRepository.save(createCommentPayload);
+      const comment = await this.characterRepository.save(
+        createCharacterPayload,
+      );
 
       return { status: true, message: 'Comment created successfully', comment };
     } catch (error) {
