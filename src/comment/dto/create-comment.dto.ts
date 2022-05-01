@@ -10,4 +10,4 @@ export class CreateCommentDto {
   ipAddressLocation: string;
 }
 
-export class UpdateCalendarDto extends PartialType(CreateCommentDto) {}
+export class UpdateCommentDto extends PartialType(CreateCommentDto) {}
