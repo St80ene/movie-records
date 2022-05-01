@@ -15,11 +15,15 @@ export class CharacterService {
 
   async create(createCharacterPayload: any): Promise<any> {
     try {
-      const comment = await this.characterRepository.save(
+      const character = await this.characterRepository.save(
         createCharacterPayload,
       );
 
-      return { status: true, message: 'Comment created successfully', comment };
+      return {
+        status: true,
+        message: 'Character created successfully',
+        character,
+      };
     } catch (error) {
       throw new InternalServerErrorException();
     }

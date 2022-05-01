@@ -9,7 +9,7 @@ import { CharacterService } from './character.service';
 import { CreateCharacterDto } from './dto/create-character.dto';
 
 @Controller({
-  path: '/comments',
+  path: '/characters',
 })
 export class CharacterController {
   constructor(private readonly characterService: CharacterService) {}
