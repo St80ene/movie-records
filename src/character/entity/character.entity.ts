@@ -8,7 +8,7 @@ import {
 
 @Entity({ name: 'characters' })
 export class Character {
-  constructor(props?: Partial<Comment>) {
+  constructor(props?: Partial<Character>) {
     props && Object.assign(this, props);
   }
 

@@ -3,7 +3,7 @@ import { IsString, Length } from 'class-validator';
 
 export class CreateCharacterDto {
   @IsString()
-  @Length(50)
+  @Length(3, 50)
   first_name: string;
 
   @IsString()

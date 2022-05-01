@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import db from './config/db';
 import { CommentModule } from './comment/comment.module';
 import { CharacterModule } from './character/character.module';
+import { LOcationModule } from './location/location.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { CharacterModule } from './character/character.module';
     }),
     CommentModule,
     CharacterModule,
+    LOcationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
