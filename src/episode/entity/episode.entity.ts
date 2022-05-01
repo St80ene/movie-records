@@ -21,6 +21,12 @@ export class Episode {
   @Column({ length: 30 })
   episode_comments: string;
 
+  @Column({ length: 30 })
+  episode_code: string;
+
+  @Column({ length: 30 })
+  release_date: string;
+
   @CreateDateColumn()
   createdAt: Date;
 
