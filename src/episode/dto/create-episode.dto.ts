@@ -8,6 +8,14 @@ export class CreateEpisodeDto {
 
   @IsNotEmpty()
   episode_comments: string;
+
+  @IsString()
+  @Length(3, 50)
+  episode_code: string;
+
+  @IsString()
+  @Length(3, 50)
+  release_date: string;
 }
 
 export class UpdateEpisodeDto extends PartialType(CreateEpisodeDto) {}
