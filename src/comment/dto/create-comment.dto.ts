@@ -7,6 +7,8 @@ export class CreateCommentDto {
   comment: string;
 
   ipAddressLocation?: string;
+
+  location?: string;
 }
 
 export class UpdateCommentDto extends PartialType(CreateCommentDto) {}
