@@ -1,3 +1,4 @@
+import { Comment } from '../../comment/entity/comment.entity';
 import {
   Entity,
   Column,
@@ -5,6 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToOne,
+  OneToMany,
   JoinColumn,
 } from 'typeorm';
 
@@ -19,13 +21,13 @@ export class Location {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ length: 50 })
+  @Column({ length: 50, default: '' })
   name: string;
 
-  @Column({ type: 'double' })
+  @Column({ type: 'double', default: 0 })
   latitude: number;
 
-  @Column({ type: 'double' })
+  @Column({ type: 'double', default: 0 })
   longitude: number;
 
   @OneToOne(() => Character, (character) => character.location, {
@@ -33,6 +35,12 @@ export class Location {
   })
   @JoinColumn({ name: 'character_id' })
   character: Character;
+
+  @OneToMany(() => Comment, (comment) => comment.location, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'comment_id' })
+  comments: Comment[];
 
   @CreateDateColumn()
   createdAt: Date;

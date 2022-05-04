@@ -1,3 +1,4 @@
+import { Location } from 'src/location/entity/location.entity';
 import {
   Entity,
   Column,
@@ -29,6 +30,12 @@ export class Comment {
   })
   @JoinColumn({ name: 'episode_id' })
   episodes: Episode[];
+
+  @ManyToOne(() => Location, (location) => location.comments, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'location_id' })
+  location: Location;
 
   @CreateDateColumn()
   createdAt: Date;

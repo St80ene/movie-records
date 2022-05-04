@@ -4,6 +4,8 @@ import {
   Body,
   UsePipes,
   ValidationPipe,
+  Get,
+  Query,
 } from '@nestjs/common';
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
@@ -13,6 +15,11 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 })
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
+
+  @Get()
+  async findAll(@Query() query) {
+    return this.commentService.findAll(query);
+  }
 
   @Post()
   @UsePipes(ValidationPipe)
