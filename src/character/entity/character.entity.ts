@@ -5,9 +5,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToMany,
   JoinColumn,
   OneToOne,
+  ManyToOne,
 } from 'typeorm';
 import { Episode } from '../../episode/entity/episode.entity';
 
@@ -35,9 +35,10 @@ export class Character {
   @Column({ type: 'enum', enum: ['Male', 'Female'] })
   gender: string;
 
-  @ManyToMany(() => Episode, (episode) => episode.characters, {
+  @ManyToOne(() => Episode, (episode) => episode.characters, {
     onDelete: 'CASCADE',
   })
+  @JoinColumn({ name: 'episode_id' })
   episodes: Episode[];
 
   @OneToOne(() => Location)

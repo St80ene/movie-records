@@ -4,8 +4,8 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToMany,
-  JoinTable,
+  OneToMany,
+  JoinColumn,
 } from 'typeorm';
 import { Character } from '../../character/entity/character.entity';
 import { Comment } from '../../comment/entity/comment.entity';
@@ -31,16 +31,14 @@ export class Episode {
   @Column({ length: 30 })
   release_date: string;
 
-  @ManyToMany(() => Character, (character) => character.episodes, {
-    onDelete: 'CASCADE',
-  })
-  @JoinTable()
+  @OneToMany(() => Character, (character) => character.episodes)
+  @JoinColumn()
   characters: Character[];
 
-  @ManyToMany(() => Comment, (comment) => comment.episodes, {
+  @OneToMany(() => Comment, (comment) => comment.episodes, {
     onDelete: 'CASCADE',
   })
-  @JoinTable()
+  @JoinColumn()
   comments: Comment[];
 
   @CreateDateColumn()
