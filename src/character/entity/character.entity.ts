@@ -1,10 +1,15 @@
+import { Location } from '../../location/entity/location.entity';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToMany,
+  JoinColumn,
+  OneToOne,
 } from 'typeorm';
+import { Episode } from '../../episode/entity/episode.entity';
 
 @Entity({ name: 'characters' })
 export class Character {
@@ -30,8 +35,14 @@ export class Character {
   @Column({ type: 'enum', enum: ['Male', 'Female'] })
   gender: string;
 
-  @Column({ type: 'json' })
-  episodes: string[];
+  @ManyToMany(() => Episode, (episode) => episode.characters, {
+    onDelete: 'CASCADE',
+  })
+  episodes: Episode[];
+
+  @OneToOne(() => Location)
+  @JoinColumn({ name: 'location_id' })
+  location: Location;
 
   @CreateDateColumn()
   createdAt: Date;

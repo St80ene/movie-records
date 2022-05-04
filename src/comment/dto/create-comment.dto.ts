@@ -6,8 +6,7 @@ export class CreateCommentDto {
   @Length(3, 250)
   comment: string;
 
-  @IsNotEmpty()
-  ipAddressLocation: string;
+  ipAddressLocation?: string;
 }
 
 export class UpdateCommentDto extends PartialType(CreateCommentDto) {}

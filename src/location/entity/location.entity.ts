@@ -4,7 +4,11 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
+
+import { Character } from '../../character/entity/character.entity';
 
 @Entity({ name: 'locations' })
 export class Location {
@@ -23,6 +27,12 @@ export class Location {
 
   @Column({ type: 'double' })
   longitude: number;
+
+  @OneToOne(() => Character, (character) => character.location, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'character_id' })
+  character: Character;
 
   @CreateDateColumn()
   createdAt: Date;

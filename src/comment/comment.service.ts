@@ -5,6 +5,8 @@ import {
   Inject,
   InternalServerErrorException,
 } from '@nestjs/common';
+/* eslint-disable */
+const ip = require('ip');
 
 @Injectable()
 export class CommentService {
@@ -15,6 +17,7 @@ export class CommentService {
 
   async create(createCommentPayload: any): Promise<any> {
     try {
+      createCommentPayload.ipAddressLocation = ip.address();
       const comment = await this.commentRepository.save(createCommentPayload);
 
       return { status: true, message: 'Comment created successfully', comment };
