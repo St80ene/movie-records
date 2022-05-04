@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToMany,
 } from 'typeorm';
+import { Episode } from '../../episode/entity/episode.entity';
 
 @Entity({ name: 'comments' })
 export class Comment {
@@ -20,6 +22,11 @@ export class Comment {
 
   @Column({ length: 30 })
   ipAddressLocation: string;
+
+  @ManyToMany(() => Episode, (episode) => episode.comments, {
+    onDelete: 'CASCADE',
+  })
+  episodes: Episode[];
 
   @CreateDateColumn()
   createdAt: Date;
