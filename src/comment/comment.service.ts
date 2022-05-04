@@ -6,8 +6,11 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 /* eslint-disable */
-const ip = require('ip');
-import { getGeoCoordinates, paginateResponseData } from '../utils/file';
+import {
+  getGeoCoordinates,
+  paginateResponseData,
+  getIpAddress,
+} from '../utils/file';
 import { Location } from '../location/entity/location.entity';
 
 @Injectable()
@@ -19,15 +22,14 @@ export class CommentService {
 
   async create(createCommentPayload: any): Promise<any> {
     try {
-      createCommentPayload.ipAddressLocation = ip.address();
-      const geoLocation = await getGeoCoordinates(
-        createCommentPayload.ipAddressLocation,
-      );
+       const { data: address } = await getIpAddress();
+
+       const { data: coordinates } = await getGeoCoordinates(address?.ip);
 
       const location = await getRepository(Location).save({
-        name: geoLocation.country,
-        latitude: geoLocation.lat,
-        longitude: geoLocation.lng,
+        name: coordinates.region,
+        latitude: coordinates.latitude,
+        longitude: coordinates.longitude,
       });
 
       createCommentPayload.location = location.id;
