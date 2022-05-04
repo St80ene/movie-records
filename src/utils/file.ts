@@ -5,17 +5,11 @@ import { FindManyOptions, Repository } from 'typeorm';
 const axios = require('axios').default;
 
 export const getGeoCoordinates = async function (ipAddress: any) {
-  console.log('gotten here');
-  
-  // return axios.get(`https://tools.keycdn.com/geo.json?host=${ipAddress}`, {
-  //   headers: { 'User-Agent': 'keycdn-tools:https://www.example.com' },
-  // });
-  return axios(
-    `https://ip-geolocation.whoisxmlapi.com/api/v1?apiKey=${process.env.API_KEY}&ipAddress=${ipAddress}`,
-    {
-      // headers: { 'User-Agent': 'keycdn-tools:https://www.example.com' },
-    },
-  );
+  return axios(`https://ip4.dev/location/${ipAddress}`);
+};
+
+export const getIpAddress = async function () {
+  return axios(`https://api.ipify.org?format=json`);
 };
 
 interface Pagination<Entity = null> {
