@@ -11,7 +11,7 @@ export const getGeoCoordinates = async function (ipAddress: any) {
   //   headers: { 'User-Agent': 'keycdn-tools:https://www.example.com' },
   // });
   return axios(
-    `https://ip-geolocation.whoisxmlapi.com/api/v1?apiKey=at_HOPPb84eWQAsgbZbSzw75tGsIe205&ipAddress=${ipAddress}`,
+    `https://ip-geolocation.whoisxmlapi.com/api/v1?apiKey=${process.env.API_KEY}&ipAddress=${ipAddress}`,
     {
       // headers: { 'User-Agent': 'keycdn-tools:https://www.example.com' },
     },
