@@ -6,7 +6,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { Episode } from './entity/episode.entity';
-import { paginateResponseData } from '../utils/file';
 
 @Injectable()
 export class EpisodeService {
