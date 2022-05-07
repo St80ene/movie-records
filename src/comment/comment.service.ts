@@ -5,11 +5,7 @@ import {
   Inject,
   InternalServerErrorException,
 } from '@nestjs/common';
-import {
-  getGeoCoordinates,
-  paginateResponseData,
-  getIpAddress,
-} from '../utils/file';
+import { getGeoCoordinates, getIpAddress } from '../utils/file';
 import { Location } from '../location/entity/location.entity';
 
 @Injectable()
@@ -55,8 +51,8 @@ export class CommentService {
         .leftJoinAndSelect('comment.location', 'comments_location')
         .orderBy('comment.ipAddressLocation', 'DESC')
         .addOrderBy('comment.createdAt', 'DESC')
-        // .skip(skip)
-        // .take(limit)
+        .skip(skip)
+        .take(limit)
         .getRawMany();
 
       return result;
