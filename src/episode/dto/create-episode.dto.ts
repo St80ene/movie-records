@@ -1,21 +1,16 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { IsNotEmpty, IsString, Length } from 'class-validator';
+import { IsString, Length } from 'class-validator';
 
 export class CreateEpisodeDto {
   @IsString()
   @Length(3, 50)
   name: string;
 
-  @IsNotEmpty()
-  episode_comments: string;
-
   @IsString()
   @Length(3, 50)
-  episode_code: string;
+  code: string;
 
-  @IsString()
-  @Length(3, 50)
-  release_date: string;
+  release_date: Date;
 }
 
 export class UpdateEpisodeDto extends PartialType(CreateEpisodeDto) {}

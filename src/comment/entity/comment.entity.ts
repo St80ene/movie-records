@@ -22,14 +22,14 @@ export class Comment {
   @Column({ length: 250 })
   comment: string;
 
-  @Column({ length: 30 })
+  @Column({ length: 30, default: '' })
   ipAddressLocation: string;
 
   @ManyToOne(() => Episode, (episode) => episode.comments, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'episode_id' })
-  episodes: Episode[];
+  episode: Episode;
 
   @ManyToOne(() => Location, (location) => location.comments, {
     onDelete: 'CASCADE',
