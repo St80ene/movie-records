@@ -29,7 +29,7 @@ export class Comment {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'episode_id' })
-  episodes: Episode[];
+  episode: Episode;
 
   @ManyToOne(() => Location, (location) => location.comments, {
     onDelete: 'CASCADE',

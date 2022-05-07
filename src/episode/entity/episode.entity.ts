@@ -35,7 +35,7 @@ export class Episode {
   @JoinColumn()
   characters: Character[];
 
-  @OneToMany(() => Comment, (comment) => comment.episodes, {
+  @OneToMany(() => Comment, (comment) => comment.episode, {
     onDelete: 'CASCADE',
   })
   @JoinColumn()
