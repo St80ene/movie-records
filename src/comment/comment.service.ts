@@ -5,7 +5,6 @@ import {
   Inject,
   InternalServerErrorException,
 } from '@nestjs/common';
-/* eslint-disable */
 import {
   getGeoCoordinates,
   paginateResponseData,
@@ -25,7 +24,6 @@ export class CommentService {
       const { data: address } = await getIpAddress();
 
       const { data: coordinates } = await getGeoCoordinates(address?.ip);
-
       const location = await getRepository(Location).save({
         name: coordinates.region,
         latitude: coordinates.latitude,
@@ -33,6 +31,7 @@ export class CommentService {
       });
 
       createCommentPayload.location = location.id;
+      createCommentPayload.ipAddressLocation = coordinates.ip;
 
       const comment = await this.commentRepository.save(createCommentPayload);
       return { status: true, message: 'Comment created successfully', comment };

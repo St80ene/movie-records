@@ -23,15 +23,14 @@ export class Episode {
   name: string;
 
   @Column({ length: 30 })
-  episode_comments: string;
+  code: string;
 
-  @Column({ length: 30 })
-  episode_code: string;
+  @Column({ type: 'timestamp', nullable: true })
+  release_date: Date;
 
-  @Column({ length: 30 })
-  release_date: string;
-
-  @OneToMany(() => Character, (character) => character.episodes)
+  @OneToMany(() => Character, (character) => character.episodes, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   characters: Character[];
 

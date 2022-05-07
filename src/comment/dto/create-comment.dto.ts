@@ -9,6 +9,8 @@ export class CreateCommentDto {
   ipAddressLocation?: string;
 
   location?: string;
+
+  episode: string;
 }
 
 export class UpdateCommentDto extends PartialType(CreateCommentDto) {}
