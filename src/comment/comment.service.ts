@@ -49,19 +49,17 @@ export class CommentService {
       const pageNumber = page || 1;
       const skip = (pageNumber - 1) * limit;
 
-      const [data, total] = await this.commentRepository.findAndCount({
-        take: limit,
-        skip,
-        relations: ['episode', 'location'],
-      });
+      const result = await getRepository(Comment)
+        .createQueryBuilder('comment')
+        .leftJoinAndSelect('comment.episode', 'episode_comments')
+        .leftJoinAndSelect('comment.location', 'comments_location')
+        .orderBy('comment.ipAddressLocation', 'DESC')
+        .addOrderBy('comment.createdAt', 'DESC')
+        // .skip(skip)
+        // .take(limit)
+        .getRawMany();
 
-      return paginateResponseData({
-        data,
-        total,
-        limit,
-        pageNumber,
-        message: 'Records retrieved successfully',
-      });
+      return result;
     } catch (error) {
       throw new InternalServerErrorException({ error: error.message });
     }
