@@ -1,4 +1,4 @@
-import { Repository } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 import { Character } from './entity/character.entity';
 import {
   Injectable,
@@ -25,7 +25,29 @@ export class CharacterService {
         character,
       };
     } catch (error) {
-      throw new InternalServerErrorException();
+      throw new InternalServerErrorException({ error: error.message });
+    }
+  }
+
+  async findAll(query) {
+    try {
+      let limit = query.limit;
+      const page = query.page;
+
+      limit = limit > 100 ? 100 : limit;
+      const pageNumber = page || 1;
+      const skip = (pageNumber - 1) * limit;
+
+      const result = await getRepository(Character)
+        .createQueryBuilder('character')
+        .leftJoinAndSelect('character.location', 'location')
+        .skip(skip)
+        .take(limit)
+        .getRawMany();
+
+      return result;
+    } catch (error) {
+      throw new InternalServerErrorException({ error: error.message });
     }
   }
 }
