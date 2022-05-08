@@ -7,23 +7,21 @@ export class CreateCharacterDto {
   first_name: string;
 
   @IsString()
-  @Length(50)
+  @Length(3, 50)
   last_name: string;
 
   @IsString()
-  @Length(50)
+  @Length(3, 50)
   status: string;
 
   @IsString()
-  @Length(50)
+  @Length(3, 50)
   state_of_origin: string;
 
   @IsString()
-  @Length(50)
+  @Length(3, 10)
   gender: string;
 
-  @IsString()
-  @Length(50)
   episodes: string[];
 }
 
